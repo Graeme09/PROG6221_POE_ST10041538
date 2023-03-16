@@ -10,6 +10,19 @@ namespace POE
     {
         static void Main(string[] args)
         {
+
+
+
         }
+    }
+
+
+
+
+    class methods {
+       public int numOfIngredients { get; set; }
+
+
+
     }
 }
