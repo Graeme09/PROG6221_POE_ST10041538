@@ -14,25 +14,8 @@ namespace POE
         {
             methods useobj = new methods();
             MethodException useobj2 = new MethodException();
-            String recipeName;
-            int numOfSteps;
-            int numOfIngredients;
+            useobj2.getMeasurementUnit();
 
-
-            Console.WriteLine("Enter the name of the recipe");
-            recipeName = Console.ReadLine();
-
-
-            numOfIngredients  = useobj2.numQuestion("Enter the amount of ingrediants there are: ");
-            numOfSteps = useobj2.numQuestion("Enter the amount of steps there are:");
-
-
-
-            useobj.getIngredients(numOfIngredients);
-            useobj.getSteps(numOfSteps);
-
-            
-            SortedList<int, String> ingredients = new SortedList<int,String>();
         }
     }
 
@@ -41,9 +24,20 @@ namespace POE
 
     class methods {
         String name;
+        int numSteps;
+
         ArrayList steps = new ArrayList();
         ArrayList ingredients = new ArrayList();
         ArrayList ingredientsType = new ArrayList();
+
+        public void getNumSteps() {
+            int temp;
+
+            Console.WriteLine("Enter the num of steps");
+            temp = Convert.ToInt32(Console.ReadLine());
+        
+            numSteps = temp;
+        }
         
         public void getSteps(int numOfSteps)
         {
@@ -54,7 +48,10 @@ namespace POE
 
                 Console.WriteLine("Enter the description of step " + i);
                 stepsDesp = Console.ReadLine();
- 
+
+
+
+                steps.Add("Step " + i + " " +stepsDesp);
                 
             }
         }
@@ -76,15 +73,11 @@ namespace POE
         
         }
 
-        public void makeRecipe() { 
-        
-        
-        
-        }
+       
 
         public void menu() {
             int option;
-        Console.WriteLine("(1) Enter a recipe\n(2) Scale a recipe\n(3) Exit ");
+        Console.WriteLine("(1) Enter a recipe\n(2) Clear a recipe\n(3) Scale the recipe\n(4) Exit\n ");
         option = Convert.ToInt32(Console.ReadLine());
 
 
@@ -116,40 +109,6 @@ namespace POE
 
     class MethodException { 
     
-    public int numQuestion(String question)
-        {
-            int num;
-            Console.WriteLine(question);
-            try
-            {
-                num = Convert.ToInt32(Console.ReadLine());
-            }
-            catch
-            {
-                num = 0;
-
-            }
-            while (num == 0)
-            {
-
-                Console.WriteLine("--------------------ERROR PLEASE ONLY ENTER AN INTEGER VALUE AND NOT 0---------------------");
-                Console.WriteLine(question);
-                try
-                {
-                    num = Convert.ToInt32(Console.ReadLine());
-                }
-                catch
-                {
-                    num = 0;
-
-                }}
-            
-
-            return num;
-        }
-    
-    
-
         public String getMeasurementUnit()
         {
             String unit = null;
@@ -157,7 +116,21 @@ namespace POE
 
             Console.WriteLine("What type of unit of measurement are you using:\n" +
                 "(1)ml\n(2)grams");
-            option = Convert.ToInt32(Console.ReadLine());
+
+            while (option != 1 && option != 2)
+            {
+                try
+                {
+                    option = Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("------------Please only enter 1 or 2------------");
+
+                }
+            }
+
+
 
 
             return unit;
