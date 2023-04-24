@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -12,7 +13,7 @@ namespace POE
         static void Main(string[] args)
         {
             methods useobj = new methods();
-            ExcepetionHandling useobj2 = new ExcepetionHandling();
+            MethodException useobj2 = new MethodException();
             String recipeName;
             int numOfSteps;
             int numOfIngredients;
@@ -22,14 +23,16 @@ namespace POE
             recipeName = Console.ReadLine();
 
 
-            useobj2.numQuestion("Enter the amount of ingrediants there are: ");
-            useobj2.numQuestion("Enter the amount of steps there are:");
+            numOfIngredients  = useobj2.numQuestion("Enter the amount of ingrediants there are: ");
+            numOfSteps = useobj2.numQuestion("Enter the amount of steps there are:");
 
 
 
-           /* useobj.getSteps(4);
-            useobj.getIngredients(4); */
+            useobj.getIngredients(numOfIngredients);
+            useobj.getSteps(numOfSteps);
 
+            
+            SortedList<int, String> ingredients = new SortedList<int,String>();
         }
     }
 
@@ -37,6 +40,11 @@ namespace POE
 
 
     class methods {
+        String name;
+        ArrayList steps = new ArrayList();
+        ArrayList ingredients = new ArrayList();
+        ArrayList ingredientsType = new ArrayList();
+        
         public void getSteps(int numOfSteps)
         {
             String stepsDesp;
@@ -47,9 +55,11 @@ namespace POE
                 Console.WriteLine("Enter the description of step " + i);
                 stepsDesp = Console.ReadLine();
  
-
+                
             }
         }
+
+
 
         int ingrediant;
         public void getIngredients(int numOfIngrediants) 
@@ -61,17 +71,50 @@ namespace POE
                 ingrediant = Convert.ToInt32(Console.ReadLine());
 
 
+          
             }
         
         }
 
+        public void makeRecipe() { 
+        
+        
+        
+        }
 
+        public void menu() {
+            int option;
+        Console.WriteLine("(1) Enter a recipe\n(2) Scale a recipe\n(3) Exit ");
+        option = Convert.ToInt32(Console.ReadLine());
+
+
+
+        switch(option)
+            {
+                case 1:
+
+                break;
+
+                case 2:
+
+                break;
+
+                case 3:
+
+                break;
+            }
+        
+        
+        
         
         }
 
 
+        }
 
-    class ExcepetionHandling { 
+
+
+    class MethodException { 
     
     public int numQuestion(String question)
         {
@@ -106,6 +149,19 @@ namespace POE
         }
     
     
+
+        public String getMeasurementUnit()
+        {
+            String unit = null;
+            int option = 0;
+
+            Console.WriteLine("What type of unit of measurement are you using:\n" +
+                "(1)ml\n(2)grams");
+            option = Convert.ToInt32(Console.ReadLine());
+
+
+            return unit;
+        }
     }
  }
 
