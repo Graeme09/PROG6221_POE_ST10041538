@@ -13,10 +13,11 @@ namespace POE
         static void Main(string[] args)
         {
             recipeClass useRecipe = new recipeClass();
-            MeasurementClass useobj2 = new MeasurementClass();
+            IngrediantClass useobj2 = new IngrediantClass();
 
             useRecipe.name = "Cake";
             useRecipe.numSteps = 2;
+ 
             useRecipe.getSteps();
             useRecipe.printRecipe();
 
@@ -31,46 +32,36 @@ namespace POE
         public String name { get; set; }
         public int numSteps { get; set; }
 
+        
 
-        public  string[] stepsArr = new string[29];
-        int[] ingredients;
-        String[] ingredientsMeasurement; 
+
+        public  string[] stepsArr = new string[29]; //Unknown Error with arrays over 30 elements big unique to my system
+        
 
         
         public void getSteps()
         {
-            int stepNum = 0;
+            int stepNum = 0; //adding this for less confusion for end user
             String stepsDesp;
 
-            for (int i = 0; i < numSteps; i++)
+            for (int i = 0; i < numSteps; i++) //for loop to gather all the array descriptions
             {
-                stepNum++;
+                stepNum++; //added for less confusion with step number 0 is 1 etc
                 Console.WriteLine("Enter the description of step " + stepNum);
+                
                 stepsDesp = Console.ReadLine();
 
-      
+                while (stepsDesp.Equals("")==true){   //Checks if the step is empty and asks them to re-enter the step
+
+                Console.WriteLine("Enter the description of step " + stepNum);
+                    stepsDesp = Console.ReadLine();
+                }
 
                 stepsArr[i] = stepsDesp;
                 
             }
         }
 
-
-
-        int ingrediant;
-        public void getIngredients(int numOfIngrediants) 
-        {
-
-
-            for (int i = 1;i <numOfIngrediants +1;i++) {
-                Console.WriteLine("Enter the type of ingrediant" + i);
-                ingrediant = Convert.ToInt32(Console.ReadLine());
-
-
-          
-            }
-        
-        }
 
        
 
@@ -129,74 +120,15 @@ namespace POE
 
 
 
-    class MeasurementClass { 
-    
-        public String getMeasurementUnit()
-        {
-            String unit = null;
-            int option = 0;
+    class IngrediantClass {
 
-            Console.WriteLine("What type of unit of measurement are you using:\n" +
-                "(1) ml\n(2) grams\n");
-
-            while (option != 1 && option != 2 && option!=3)
-            {
-                try
-                {
-                    option = Convert.ToInt32(Console.ReadLine());
-                }
-                catch
-                {
-                    Console.WriteLine("------------Please only enter 1 or 2------------");
-
-                }
-            }
-
-            switch (option) {
-                case 1:
-                    unit = "ml";
-                break;
-
-                case 2:
-                    unit = "grams";
-                break;
-
-            }
-
-            return unit;
-        }
+        public int numOfIngred { get; set; }
 
 
-        public int convertMeasurementUnit(int amount, String type) {
-            int converstion = 0;
+        public String[] ingredName = new string[29];//Unknown Error with arrays over 30 elements big unique to my system
+        public int[] ingredSize = new int[29];
+        public String[] ingredType = new string[29];
 
-
-            if (type.Equals("Cups"))
-            {
-                converstion = amount * 250;
-
-            }
-            else {
-                if (type.Equals("Tablespoons"))
-                {
-                    converstion = amount * 15;
-                }
-                else
-                {
-                    if (type.Equals("Teaspoons"))
-                    {
-
-                        converstion = amount * 5;
-                    }
-
-                }
-            
-            }
-
-
-
-            return converstion;
-        }
     }
  }
 
