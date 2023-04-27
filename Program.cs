@@ -17,7 +17,7 @@ namespace POE
 
             useRecipe.name = "Cake";
             useRecipe.numSteps = 2;
-            useRecipe.getSteps(2);
+            useRecipe.getSteps();
             useRecipe.printRecipe();
 
 
@@ -37,12 +37,12 @@ namespace POE
         String[] ingredientsMeasurement; 
 
         
-        public void getSteps(int numOfSteps)
+        public void getSteps()
         {
             int stepNum = 0;
             String stepsDesp;
 
-            for (int i = 0; i < numOfSteps + 1; i++)
+            for (int i = 0; i < numSteps; i++)
             {
                 stepNum++;
                 Console.WriteLine("Enter the description of step " + stepNum);
@@ -111,14 +111,15 @@ namespace POE
 
 
         public void printRecipe() {
-
+            int stepnum = 0;
             Console.WriteLine("_________________________________________________________________________________________________________\n" +
                 "Recipen name :" + name);
 
-            Console.WriteLine("Steps:");
+            Console.WriteLine("----------------------------------------------Steps------------------------------------------------------");
             for (int i = 0; i < numSteps; i++) {
+                stepnum++;
                
-                Console.WriteLine("Step " + i + ":" + stepsArr[i]);
+                Console.WriteLine("Step " + stepnum + ":" + stepsArr[i]);
             }
 
             Console.WriteLine("_________________________________________________________________________________________________________");
