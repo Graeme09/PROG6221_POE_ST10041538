@@ -12,9 +12,14 @@ namespace POE
     {
         static void Main(string[] args)
         {
-            methods useobj = new methods();
-            MethodException useobj2 = new MethodException();
-            useobj2.getMeasurementUnit();
+            recipeClass useRecipe = new recipeClass();
+            MeasurementClass useobj2 = new MeasurementClass();
+
+            useRecipe.name = "Cake";
+            useRecipe.numSteps = 2;
+            useRecipe.getSteps(2);
+            useRecipe.printRecipe();
+
 
         }
     }
@@ -22,36 +27,30 @@ namespace POE
 
 
 
-    class methods {
-        String name;
-        int numSteps;
+    class recipeClass {
+        public String name { get; set; }
+        public int numSteps { get; set; }
 
-        ArrayList steps = new ArrayList();
-        ArrayList ingredients = new ArrayList();
-        ArrayList ingredientsType = new ArrayList();
 
-        public void getNumSteps() {
-            int temp;
+        public  string[] stepsArr = new string[29];
+        int[] ingredients;
+        String[] ingredientsMeasurement; 
 
-            Console.WriteLine("Enter the num of steps");
-            temp = Convert.ToInt32(Console.ReadLine());
-        
-            numSteps = temp;
-        }
         
         public void getSteps(int numOfSteps)
         {
+            int stepNum = 0;
             String stepsDesp;
 
-            for (int i = 0 + 1; i < numOfSteps + 1; i++)
+            for (int i = 0; i < numOfSteps + 1; i++)
             {
-
-                Console.WriteLine("Enter the description of step " + i);
+                stepNum++;
+                Console.WriteLine("Enter the description of step " + stepNum);
                 stepsDesp = Console.ReadLine();
 
+      
 
-
-                steps.Add("Step " + i + " " +stepsDesp);
+                stepsArr[i] = stepsDesp;
                 
             }
         }
@@ -75,9 +74,9 @@ namespace POE
 
        
 
-        public void menu() {
+        /*public void menu() {
             int option;
-        Console.WriteLine("(1) Enter a recipe\n(2) Clear a recipe\n(3) Scale the recipe\n(4) Exit\n ");
+        Console.WriteLine("(1) Enter a recipe\n(2) Clear a recipe\n(3) Scale the recipe\n(4) Return Recipe to orignal Scale\n(5) Exit");
         option = Convert.ToInt32(Console.ReadLine());
 
 
@@ -95,19 +94,41 @@ namespace POE
                 case 3:
 
                 break;
+
+                case 4:
+
+                break;
+
+                case 5:
+
+                break;
             }
         
         
         
         
+        }*/ //For future use
+
+
+        public void printRecipe() {
+
+            Console.WriteLine("_________________________________________________________________________________________________________\n" +
+                "Recipen name :" + name);
+
+            Console.WriteLine("Steps:");
+            for (int i = 0; i < numSteps; i++) {
+               
+                Console.WriteLine("Step " + i + ":" + stepsArr[i]);
+            }
+
+            Console.WriteLine("_________________________________________________________________________________________________________");
+        }
+
         }
 
 
-        }
 
-
-
-    class MethodException { 
+    class MeasurementClass { 
     
         public String getMeasurementUnit()
         {
@@ -115,9 +136,9 @@ namespace POE
             int option = 0;
 
             Console.WriteLine("What type of unit of measurement are you using:\n" +
-                "(1)ml\n(2)grams");
+                "(1) ml\n(2) grams\n");
 
-            while (option != 1 && option != 2)
+            while (option != 1 && option != 2 && option!=3)
             {
                 try
                 {
@@ -130,10 +151,50 @@ namespace POE
                 }
             }
 
+            switch (option) {
+                case 1:
+                    unit = "ml";
+                break;
 
+                case 2:
+                    unit = "grams";
+                break;
 
+            }
 
             return unit;
+        }
+
+
+        public int convertMeasurementUnit(int amount, String type) {
+            int converstion = 0;
+
+
+            if (type.Equals("Cups"))
+            {
+                converstion = amount * 250;
+
+            }
+            else {
+                if (type.Equals("Tablespoons"))
+                {
+                    converstion = amount * 15;
+                }
+                else
+                {
+                    if (type.Equals("Teaspoons"))
+                    {
+
+                        converstion = amount * 5;
+                    }
+
+                }
+            
+            }
+
+
+
+            return converstion;
         }
     }
  }
