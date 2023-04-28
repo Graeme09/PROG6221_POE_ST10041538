@@ -166,30 +166,30 @@ namespace POE
 
 
 
-
+                tempSize = 0;
                 Console.WriteLine("Enter the amount of your ingredient " + tempName + ":");
                 try
                 {
                     tempSize = Convert.ToDouble(Console.ReadLine());
-                    ingredSize[i] = tempSize;
                 }
+
                 catch
                 {
-                    while (ingredSize[i] == null)
+                    while (tempSize==0)
                     {
-                        Console.WriteLine("Enter the amount of your ingredient " + tempName + ":");
-                        tempSize = Convert.ToDouble(Console.ReadLine());
                         try
                         {
-                            ingredSize[i] = tempSize;
-
+                            Console.WriteLine("Enter the amount of your ingredient " + tempName + ":");
+                            tempSize = Convert.ToDouble(Console.ReadLine());
                         }
-                        catch
-                        {
-                            Console.WriteLine("Please only enter a number value");
+                        catch { 
+                        tempSize =0;
                         }
                     }
                 }
+                    ingredSize[i] = tempSize;
+                
+               
 
 
 
@@ -210,10 +210,27 @@ namespace POE
         }
 
         public void scaleIngred() {
-            int temp;
-            Console.WriteLine("Would you like to scale the recipe:\n(1) Yes\n(2) Yes");
-            temp = Convert.ToInt32(Console.ReadLine());
-        
+            String temp;
+            Console.WriteLine("Would you like to scale the recipe:\n(1) Yes\n(2) No");
+            temp = Console.ReadLine();
+
+            while (!temp.ToLower().Equals("yes") || !temp.ToLower().Equals("no")) {
+                Console.WriteLine("Would you like to scale the recipe:\n(1) Yes\n(2) No");
+                temp = Console.ReadLine();
+
+
+            }
+
+            if (temp.ToLower().Equals("yes"))
+            {
+
+                isScaled = true;
+            }
+            else { 
+            isScaled = false;
+            }
+
+
         
         }
     }
