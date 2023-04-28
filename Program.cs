@@ -19,9 +19,11 @@ namespace POE
             useRecipe.numSteps = 2;
 
             useRecipe.getSteps();
-            useRecipe.printRecipe();*/
+            useRecipe.printRecipe();
             useobj2.numOfIngred = 3;
-            useobj2.getIngredInfo();
+            useobj2.getIngredInfo();*/
+
+            useobj2.scaleIngred();
 
           
         }
@@ -128,7 +130,6 @@ namespace POE
 
     class IngrediantClass
     {
-
         public int numOfIngred { get; set; }
 
 
@@ -211,10 +212,12 @@ namespace POE
 
         public void scaleIngred() {
             String temp;
-            Console.WriteLine("Would you like to scale the recipe:\n(1) Yes\n(2) No");
+            double numberTemp;
+            double scaleFactor = 0;
+            Console.WriteLine("Would you like to scale the recipe:\nYes\nNo");
             temp = Console.ReadLine();
 
-            while (!temp.ToLower().Equals("yes") || !temp.ToLower().Equals("no")) {
+            while (!temp.ToLower().Equals("yes") && !temp.ToLower().Equals("no")) {
                 Console.WriteLine("Would you like to scale the recipe:\n(1) Yes\n(2) No");
                 temp = Console.ReadLine();
 
@@ -231,7 +234,49 @@ namespace POE
             }
 
 
+
+
+
+            if(isScaled==true)
+            {
+                
+
+                //while checks if the scale factor has a correct option by only allowing 0.5, 2 and 3 to be inputted
+                while (scaleFactor == 0 && scaleFactor!=0.5 && scaleFactor !=2 && scaleFactor !=3)
+                {
+                    try
+                    {
+                        Console.WriteLine("Would you like the the recipe scaled by a factor of : 0.5\t2\t3");
+                        scaleFactor = Convert.ToDouble(Console.ReadLine());
+                    }
+                    catch
+                    {
+                        scaleFactor = 0;
+                    }
+                }
+
+
+                for (int i = 0; i < numOfIngred; i++){
+
+
+                    numberTemp = ingredSize[i];
+
+
+                    numberTemp = numberTemp * scaleFactor;
+
+                    Math.Round(numberTemp, 2);
+
+                    ingredSizeScaled[i] = numberTemp;
+                }
+
+
+
+            }
         
+
+
+
+
         }
     }
 }
