@@ -39,6 +39,8 @@ namespace POE
             int option = 0;
             int stepNum;
             int ingredientNum;
+            String tempConfirm;
+            Boolean recipeActive = false;
 
 
             while (option != 6)
@@ -54,7 +56,7 @@ namespace POE
                 {
                     case 1:
 
-
+                        recipeActive = true;
                         Console.WriteLine("Enter the name of the recipe");
                         name = Console.ReadLine();
                         while (name.Equals(""))
@@ -92,19 +94,34 @@ namespace POE
                         break;
 
                     case 2:
+                        Console.WriteLine("Enter CONFIRM exactly as spelled to clear the array");
+                        tempConfirm = Console.ReadLine();
+                        if (tempConfirm.Equals("CONFIRM")) { //Checks if tempConfrim says CONFIRM
+                            useIngredient.clearArray();
+                            useSteps.clearArray();
 
+                            recipeActive = false;//No active recipe
+
+                        }
                         break;
 
                     case 3:
-
+                        useIngredient.checkIfScale();
+                        useIngredient.scaleIngred();
                         break;
 
                     case 4:
-
+                        Console.WriteLine("The recipe has been converted to it's orignal values");
                         break;
 
                     case 5:
+                        if (recipeActive == true) {
 
+
+                        }
+                        else{
+                            Console.WriteLine("No Recipe Found");
+                        }
                         break;
 
                     case 6:
@@ -177,7 +194,11 @@ namespace POE
             }
         }
 
+        public void clearArray() {
 
+
+            Array.Clear(stepsArr, 0, stepsArr.Length);
+        }
 
 
 
@@ -274,6 +295,7 @@ namespace POE
 
 
         public void checkIfScale() {
+            //Checks if 
             String temp;
             Console.WriteLine("Would you like to scale the recipe:\nYes\nNo");
             temp = Console.ReadLine();
@@ -285,7 +307,7 @@ namespace POE
 
 
             }
-
+            //allows user to enter yes or no no matter of case
             if (temp.ToLower().Equals("yes"))
             {
 
@@ -295,21 +317,23 @@ namespace POE
             {
                 isScaled = false;
             }
-
+            //sets boolean depending on answer
         }
 
         public void scaleIngred() {
             
             double numberTemp;
-            double scaleFactor = 0;
-           
+            double scaleFactor;
 
-            if(isScaled==true)
+
+            if (isScaled == true)
             {
-                
 
+                Console.WriteLine("Would you like the the recipe scaled by a factor of : 0.5\t2\t3");
+                try { scaleFactor = Convert.ToDouble(Console.ReadLine()); }
+                catch { scaleFactor = 123; }
                 //while checks if the scale factor has a correct option by only allowing 0.5, 2 and 3 to be inputted
-                while (scaleFactor == 0 && scaleFactor!=0.5 && scaleFactor !=2 && scaleFactor !=3)
+                while (scaleFactor != 0.5 && scaleFactor != 2 && scaleFactor != 3)
                 {
                     try
                     {
@@ -321,23 +345,27 @@ namespace POE
                         scaleFactor = 0;
                     }
                 }
+                //Gets the scale factor and checks if its one of the options
+
+                for (int i = 0; i < numOfIngred; i++)
+                {
 
 
-                for (int i = 0; i < numOfIngred; i++){
+                    numberTemp = ingredSize[i];//retrieves old size
 
 
-                    numberTemp = ingredSize[i];
+                    numberTemp = numberTemp * scaleFactor;//creates new size
 
-
-                    numberTemp = numberTemp * scaleFactor;
-
-                    Math.Round(numberTemp, 2);
+                    Math.Round(numberTemp, 2);//rounds to 2 decimal places
 
                     ingredSizeScaled[i] = numberTemp;
                 }
+                
 
 
-
+            }
+            else {
+                Console.WriteLine("The recipe will not be scaled");
             }
         
 
@@ -350,14 +378,14 @@ namespace POE
 
         public void printScale() {
 
-            if (isScaled == true)
+            if (isScaled == true)//checks if recipe has been scaled if so uses new scaled array
             {
 
                 for (int i = 0; i < numOfIngred; i++)
                 {
 
                     Console.WriteLine("Ingrediant : " + ingredName[i] + " amount : " + ingredSizeScaled[i] + " " + ingredType[i]);
-
+                    //prints out all the ingrediants for the amount of ingrediants
 
                 }
 
@@ -368,7 +396,7 @@ namespace POE
 
                 for (int i = 0; i < numOfIngred; i++)
                 {
-
+                    //prints out all the ingrediants for the amount of ingrediants
                     Console.WriteLine("Ingrediant : " + ingredName[i] + " amount : " + ingredSize[i] + " " + ingredType[i]);
 
 
@@ -378,6 +406,17 @@ namespace POE
 
             }
         
+        }
+
+
+        public void clearArray()
+        {
+
+            Array.Clear(ingredName, 0 , ingredName.Length);
+            Array.Clear(ingredSize, 0, ingredSize.Length);
+            Array.Clear(ingredType, 0, ingredType.Length);
+            Array.Clear(ingredSizeScaled, 0, ingredSizeScaled.Length);
+
         }
     }
 }
