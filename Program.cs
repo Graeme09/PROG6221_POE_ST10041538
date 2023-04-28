@@ -13,7 +13,7 @@ namespace POE
         static void Main(string[] args)
         {
             recipeClass useRecipe = new recipeClass();
-            IngrediantClass useobj2 = new IngrediantClass();
+            
 
             /*useRecipe.name = "Cake";
             useRecipe.numSteps = 2;
@@ -23,7 +23,7 @@ namespace POE
             useobj2.numOfIngred = 3;
             useobj2.getIngredInfo();*/
 
-            useobj2.scaleIngred();
+      
 
           
         }
@@ -34,16 +34,84 @@ namespace POE
 
     class recipeClass
     {
-        public String name { get; set; }
+        public String name;
+
+
+        IngrediantClass useIngredient = new IngrediantClass();
+        StepsClass useSteps = new StepsClass();
+
+
+        public void menu() {
+            int option;
+        Console.WriteLine("(1) Enter a recipe\n(2) Clear a recipe\n(3) Scale the recipe\n(4) Return Recipe to orignal Scale\n(5) Print Recipe\n(6)Exit");
+        option = Convert.ToInt32(Console.ReadLine());
+
+            while (option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6) {
+                Console.WriteLine("(1) Enter a recipe\n(2) Clear a recipe\n(3) Scale the recipe\n(4) Return Recipe to orignal Scale\n(5) Print Recipe\n(6)Exit");
+                try { option = Convert.ToInt32(Console.ReadLine()); }
+                catch { option = 0; }
+
+
+            }
+
+        switch(option)
+            {
+                case 1:
+                    Console.WriteLine("Enter the name of the recipe");
+                    name = Console.ReadLine();
+                    while (name != null) {
+                        Console.WriteLine("Enter the name of the recipe");
+                        name = Console.ReadLine();
+                    }
+                break;
+
+                case 2:
+
+                break;
+
+                case 3:
+
+                break;
+
+                case 4:
+
+                break;
+
+                case 5:
+
+                break;
+
+                case 6:
+                    
+                break;
+            }
+        
+        
+        
+        
+        } //For future use
+
+
+        public void printRecipe()
+        {
+
+          
+            Console.WriteLine("_________________________________________________________________________________________________________\n" +
+                "Recipen name :" + name);
+
+            Console.WriteLine("----------------------------------------------Steps------------------------------------------------------");
+            
+
+            Console.WriteLine("_________________________________________________________________________________________________________");
+        }
+
+    }
+
+    class StepsClass {
+
         public int numSteps { get; set; }
 
-
-
-
         public string[] stepsArr = new string[29]; //Unknown Error with arrays over 30 elements big unique to my system
-
-
-
         public void getSteps()
         {
             int stepNum = 0; //adding this for less confusion for end user
@@ -69,64 +137,31 @@ namespace POE
         }
 
 
-
-
-        /*public void menu() {
-            int option;
-        Console.WriteLine("(1) Enter a recipe\n(2) Clear a recipe\n(3) Scale the recipe\n(4) Return Recipe to orignal Scale\n(5) Exit");
-        option = Convert.ToInt32(Console.ReadLine());
-
-
-
-        switch(option)
-            {
-                case 1:
-
-                break;
-
-                case 2:
-
-                break;
-
-                case 3:
-
-                break;
-
-                case 4:
-
-                break;
-
-                case 5:
-
-                break;
-            }
-        
-        
-        
-        
-        }*/ //For future use
-
-
-        public void printRecipe()
-        {
+        public void printSteps() {
             int stepnum = 0;
-            Console.WriteLine("_________________________________________________________________________________________________________\n" +
-                "Recipen name :" + name);
 
-            Console.WriteLine("----------------------------------------------Steps------------------------------------------------------");
+
+
+
             for (int i = 0; i < numSteps; i++)
             {
                 stepnum++;
 
                 Console.WriteLine("Step " + stepnum + ":" + stepsArr[i]);
             }
-
-            Console.WriteLine("_________________________________________________________________________________________________________");
         }
 
+
+
+
+
+
+
+
+
+
+
     }
-
-
 
     class IngrediantClass
     {
@@ -210,14 +245,15 @@ namespace POE
 
         }
 
-        public void scaleIngred() {
+
+
+        public void checkIfScale() {
             String temp;
-            double numberTemp;
-            double scaleFactor = 0;
             Console.WriteLine("Would you like to scale the recipe:\nYes\nNo");
             temp = Console.ReadLine();
 
-            while (!temp.ToLower().Equals("yes") && !temp.ToLower().Equals("no")) {
+            while (!temp.ToLower().Equals("yes") && !temp.ToLower().Equals("no"))
+            {
                 Console.WriteLine("Would you like to scale the recipe:\n(1) Yes\n(2) No");
                 temp = Console.ReadLine();
 
@@ -229,13 +265,18 @@ namespace POE
 
                 isScaled = true;
             }
-            else { 
-            isScaled = false;
+            else
+            {
+                isScaled = false;
             }
 
+        }
 
-
-
+        public void scaleIngred() {
+            
+            double numberTemp;
+            double scaleFactor = 0;
+           
 
             if(isScaled==true)
             {
@@ -277,6 +318,40 @@ namespace POE
 
 
 
+        }
+
+
+
+        public void printScale() {
+
+            if (isScaled == true)
+            {
+
+                for (int i = 0; i < numOfIngred; i++)
+                {
+
+                    Console.WriteLine("Ingrediant : " + ingredName[i] + " amount : " + ingredSizeScaled[i] + " " + ingredType[i]);
+
+
+                }
+
+
+            }
+            else {
+
+
+                for (int i = 0; i < numOfIngred; i++)
+                {
+
+                    Console.WriteLine("Ingrediant : " + ingredName[i] + " amount : " + ingredSize[i] + " " + ingredType[i]);
+
+
+                }
+
+
+
+            }
+        
         }
     }
 }
