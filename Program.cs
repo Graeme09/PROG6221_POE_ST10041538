@@ -13,15 +13,9 @@ namespace POE
         static void Main(string[] args)
         {
             recipeClass useRecipe = new recipeClass();
-            
 
-            /*useRecipe.name = "Cake";
-            useRecipe.numSteps = 2;
 
-            useRecipe.getSteps();
-            useRecipe.printRecipe();
-            useobj2.numOfIngred = 3;
-            useobj2.getIngredInfo();*/
+            useRecipe.menu();
 
       
 
@@ -42,52 +36,84 @@ namespace POE
 
 
         public void menu() {
-            int option;
-        Console.WriteLine("(1) Enter a recipe\n(2) Clear a recipe\n(3) Scale the recipe\n(4) Return Recipe to orignal Scale\n(5) Print Recipe\n(6)Exit");
-        option = Convert.ToInt32(Console.ReadLine());
+            int option = 0;
+            int stepNum;
+            int ingredientNum;
 
-            while (option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6) {
+
+            while (option != 6)
+            {
                 Console.WriteLine("(1) Enter a recipe\n(2) Clear a recipe\n(3) Scale the recipe\n(4) Return Recipe to orignal Scale\n(5) Print Recipe\n(6)Exit");
                 try { option = Convert.ToInt32(Console.ReadLine()); }
                 catch { option = 0; }
 
 
-            }
 
-        switch(option)
-            {
-                case 1:
-                    Console.WriteLine("Enter the name of the recipe");
-                    name = Console.ReadLine();
-                    while (name != null) {
+
+                switch (option)
+                {
+                    case 1:
+
+
                         Console.WriteLine("Enter the name of the recipe");
                         name = Console.ReadLine();
-                    }
-                break;
+                        while (name.Equals(""))
+                        {
+                            Console.WriteLine("Enter the name of the recipe");
+                            name = Console.ReadLine();
+                        } //Entering recipe name and checking if it null
 
-                case 2:
 
-                break;
+                        Console.WriteLine("Enter the number of steps between 1 and 29");
+                        try { stepNum = Convert.ToInt32(Console.ReadLine()); }
+                        catch { stepNum = 0; }
 
-                case 3:
+                        while (stepNum <0 || stepNum > 29)
+                        {
+                            Console.WriteLine("Enter the number of steps between 1 and 29");
+                            try { stepNum = Convert.ToInt32(Console.ReadLine()); }
+                            catch { stepNum = 0; }
+                        }//Getting a number of steps between 1 and 29 due to an Error
+                        useSteps.numSteps = stepNum;
+                        useSteps.getSteps();
 
-                break;
 
-                case 4:
+                        Console.WriteLine("Enter the number of Ingredient between 1 and 29");
+                        try { ingredientNum = Convert.ToInt32(Console.ReadLine()); }
+                        catch { ingredientNum = 0; }
+                        while (ingredientNum <=0 || ingredientNum > 29)
+                        {
+                            Console.WriteLine("Enter the number of Ingredient between 1 and 29");
+                            try { ingredientNum = Convert.ToInt32(Console.ReadLine()); }
+                            catch { ingredientNum = 0; }
+                        }//Getting a number of steps between 1 and 29 due to an Error
+                        useIngredient.numOfIngred = ingredientNum;
+                        useIngredient.getIngredInfo();
+                        break;
 
-                break;
+                    case 2:
 
-                case 5:
+                        break;
 
-                break;
+                    case 3:
 
-                case 6:
-                    
-                break;
+                        break;
+
+                    case 4:
+
+                        break;
+
+                    case 5:
+
+                        break;
+
+                    case 6:
+
+                        break;
+                }
+
+
             }
-        
-        
-        
         
         } //For future use
 
@@ -181,9 +207,9 @@ namespace POE
             String tempName;
             double tempSize;
             String tempType;
+            //declaring temp vars
 
-
-            for (int i = 0; i < numOfIngred; i++)
+            for (int i = 0; i < numOfIngred; i++) //runs loop for amount of ingredients
             {
                 ingredCount++;
                 Console.WriteLine("Enter the name of your ingredient " + ingredCount + ":");
@@ -211,7 +237,7 @@ namespace POE
 
                 catch
                 {
-                    while (tempSize==0)
+                    while ( tempSize<=0) //gets size and confirms it's an actual number thats usable
                     {
                         try
                         {
@@ -224,7 +250,7 @@ namespace POE
                     }
                 }
                     ingredSize[i] = tempSize;
-                
+                //adds to array
                
 
 
@@ -232,14 +258,14 @@ namespace POE
                 Console.WriteLine("Enter the unit of measurement used for " + tempName + ":");
                 tempType = Console.ReadLine();
                 while (tempType.Equals("") == true)
-                {   //Checks if the ingredient name is empty and asks them to re-enter the name
+                {   //Checks if the ingredient type is empty and asks them to re-enter the type
 
                     Console.WriteLine("Enter the unit of measurement used for " + tempName + ":");
                     tempName = Console.ReadLine();
                 }
 
                 ingredType[i] = tempType;
-            }
+            }//adds to array
 
 
 
