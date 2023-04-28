@@ -118,6 +118,18 @@ namespace POE
                         if (recipeActive == true) {
 
 
+
+                            Console.WriteLine("_________________________________________________________________________________________________________\n" +
+                                "Recipen name :" + name);
+
+                            Console.WriteLine("----------------------------------------------Steps------------------------------------------------------");
+                            useSteps.printSteps();
+
+                            Console.WriteLine("----------------------------------------------Ingredients------------------------------------------------");
+
+                            useIngredient.printIngredients();
+                            Console.WriteLine("_________________________________________________________________________________________________________\n");
+                            //outputs Ingredients
                         }
                         else{
                             Console.WriteLine("No Recipe Found");
@@ -135,18 +147,6 @@ namespace POE
         } //For future use
 
 
-        public void printRecipe()
-        {
-
-          
-            Console.WriteLine("_________________________________________________________________________________________________________\n" +
-                "Recipen name :" + name);
-
-            Console.WriteLine("----------------------------------------------Steps------------------------------------------------------");
-            
-
-            Console.WriteLine("_________________________________________________________________________________________________________");
-        }
 
     }
 
@@ -183,7 +183,7 @@ namespace POE
         public void printSteps() {
             int stepnum = 0;
 
-
+            //runs loop for size of array and outputs in an formated way
 
 
             for (int i = 0; i < numSteps; i++)
@@ -196,7 +196,7 @@ namespace POE
 
         public void clearArray() {
 
-
+            //sets array values to 0
             Array.Clear(stepsArr, 0, stepsArr.Length);
         }
 
@@ -326,7 +326,7 @@ namespace POE
             double scaleFactor;
 
 
-            if (isScaled == true)
+            if (isScaled == true)//checks if it must be scaled
             {
 
                 Console.WriteLine("Would you like the the recipe scaled by a factor of : 0.5\t2\t3");
@@ -376,7 +376,7 @@ namespace POE
 
 
 
-        public void printScale() {
+        public void printIngredients() {
 
             if (isScaled == true)//checks if recipe has been scaled if so uses new scaled array
             {
